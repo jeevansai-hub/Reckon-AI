@@ -15,16 +15,12 @@ driver-skew claims against the actual files on disk.
 Usage:
     python scripts/explore_dataset.py
 """
-import sys
 import math
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import pandas as pd
 
-import pandas as pd  # noqa: E402
-
-from src.loader import load_run  # noqa: E402
-from src.schema import S_COLUMNS, V_COLUMNS  # noqa: E402
+from io_vnbd.data.loader import load_run
 
 ROOT = Path(__file__).resolve().parent.parent / "data" / "IO-VNBD" / \
     "Synchronised V abd S datasets" / "Categorised IOVNB Dataset"
@@ -85,7 +81,8 @@ def main():
             duration_s = n_rows * dt if pd.notna(dt) else float("nan")
             dist_km = haversine_km(v_df["lat"], v_df["lon"])
 
-            nan_counts = s_df[["accel_x", "accel_y", "accel_z", "gyro_yaw", "gyro_pitch", "gyro_roll"]].isna().sum().sum()
+            imu_cols = ["accel_x", "accel_y", "accel_z", "gyro_yaw", "gyro_pitch", "gyro_roll"]
+            nan_counts = s_df[imu_cols].isna().sum().sum()
 
             rows.append({
                 "category": category,
@@ -128,7 +125,8 @@ def main():
     print("\n--- SAMPLING RATE CHECK (median dt per run, should cluster near 0.1s = 10Hz) ---")
     print(df["median_dt_s"].describe().to_string())
 
-    out_path = Path(__file__).resolve().parent.parent / "data" / "eda_run_summary.csv"
+    out_path = Path(__file__).resolve().parent.parent / "reports" / "eda_run_summary.csv"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out_path, index=False)
     print(f"\nFull per-run table written to {out_path}")
 

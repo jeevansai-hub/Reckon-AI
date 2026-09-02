@@ -5,4 +5,7 @@ data/IO-VNBD/
 models/*.pt
 models/*.ckpt
 .pytest_cache/
+.ruff_cache/
 *.egg-info/
+build/
+logs/

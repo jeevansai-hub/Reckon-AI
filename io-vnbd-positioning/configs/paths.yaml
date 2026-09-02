@@ -1,0 +1,7 @@
+# Where generated artifacts get written. All paths are relative to the
+# io-vnbd-positioning/ project root and are gitignored -- nothing here
+# is ever committed.
+
+models_dir: "models"
+reports_dir: "reports"
+logs_dir: "logs"

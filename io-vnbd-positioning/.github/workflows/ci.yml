@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - "io-vnbd-positioning/**"
+  pull_request:
+    paths:
+      - "io-vnbd-positioning/**"
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: io-vnbd-positioning
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package (dev extras)
+        run: pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check src tests scripts
+      - name: Run data-free tests
+        run: pytest tests/test_model_smoke.py -v

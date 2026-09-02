@@ -1,0 +1,23 @@
+# Dataset layout and train/val/test split.
+# Mirrors the constants currently hardcoded in src/io_vnbd/data/windowing.py
+# and src/io_vnbd/data/bias.py -- becomes the authoritative source once
+# training code (Milestone 2) reads from here instead of the hardcoded values.
+
+dataset_root: "data/IO-VNBD/Synchronised V abd S datasets/Categorised IOVNB Dataset"
+
+category_driver:
+  S: "Driver A"
+  M: "Driver B"
+  Y: "Driver D"
+  Vf: "Driver E"
+  Vta: "Driver E"
+  Vtb: "Driver E"
+  Vw: "Driver E"
+
+split:
+  train_categories: ["S", "Vf", "Vta", "Vw"]
+  val_categories: ["Y", "M"]      # small defensive-driver runs: style-generalization check
+  test_categories: ["Vtb"]        # entire category held out: unseen-route test
+
+bias_calibration:
+  stationary_runs: ["Vw1", "Vw15"]

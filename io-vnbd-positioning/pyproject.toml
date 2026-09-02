@@ -1,0 +1,41 @@
+[project]
+name = "io-vnbd-positioning"
+version = "0.1.0"
+description = "GPS-denied ground-vehicle positioning using the IO-VNBD dataset."
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "torch>=2.2",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+    "pyproj>=3.6",
+    "tqdm>=4.66",
+    "pyyaml>=6.0",
+    "osmnx>=1.9",
+    "leuvenmapmatching>=1.1",
+    "filterpy>=1.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

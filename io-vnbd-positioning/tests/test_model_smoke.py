@@ -1,20 +1,15 @@
 """
 Data-free smoke test -- confirms the model builds and runs a forward pass
 with the right shapes, without needing the (large, LFS-gated) dataset
-downloaded. Run this immediately after `pip install -r requirements.txt`
+downloaded. Run this immediately after `pip install -e .[dev]`
 to confirm your environment is sane before pulling any data.
 
 Usage:
     pytest tests/test_model_smoke.py -v
 """
-import sys
-from pathlib import Path
+import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-import torch  # noqa: E402
-
-from src.model import InertialDisplacementNet  # noqa: E402
+from io_vnbd.models.lstm import InertialDisplacementNet
 
 
 def test_forward_pass_shape():
@@ -27,7 +22,11 @@ def test_forward_pass_shape():
 def test_evaluate_metrics_run():
     import numpy as np
 
-    from src.evaluate import absolute_trajectory_error, integrate_trajectory, relative_pose_error
+    from io_vnbd.evaluation.metrics import (
+        absolute_trajectory_error,
+        integrate_trajectory,
+        relative_pose_error,
+    )
 
     displacements = np.random.randn(50, 2) * 0.1
     pred_xy = integrate_trajectory(displacements)

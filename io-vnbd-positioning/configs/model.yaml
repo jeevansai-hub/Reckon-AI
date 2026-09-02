@@ -1,0 +1,21 @@
+# Windowing and model hyperparameters.
+# Mirrors current defaults in src/io_vnbd/data/windowing.py (make_windows)
+# and src/io_vnbd/models/lstm.py (InertialDisplacementNet) -- becomes the
+# authoritative source once src/io_vnbd/training/train.py (Milestone 2)
+# reads from here instead of relying on function-signature defaults.
+
+windowing:
+  window_size: 100   # rows; 100 rows @ 10Hz = 10 seconds of driving per window
+  stride: 50          # 50% overlap between consecutive windows
+
+model:
+  in_channels: 6       # accel_x/y/z (gravity-corrected) + gyro_yaw/pitch/roll
+  hidden_size: 128
+  num_layers: 2
+
+training:
+  epochs: 50
+  batch_size: 64
+  learning_rate: 0.001
+  optimizer: "adam"
+  loss: "mse"

@@ -10,12 +10,9 @@ section 6 -- this is exactly the kind of mismatch this script exists to catch).
 Usage:
     python scripts/verify_schema.py
 """
-import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-from src.schema import S_COLUMNS, V_COLUMNS  # noqa: E402
+from io_vnbd.data.schema import S_COLUMNS, V_COLUMNS
 
 DATA_ROOT = Path(__file__).resolve().parent.parent / "data" / "IO-VNBD" / \
     "Synchronised V abd S datasets" / "Categorised IOVNB Dataset" / "S (Driver A)" / "S1"
