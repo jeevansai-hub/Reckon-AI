@@ -27,5 +27,5 @@ S_COLUMNS = [
     "gravity_x", "gravity_y", "gravity_z",
     "gyro_yaw", "gyro_pitch", "gyro_roll",
     "mag_x", "mag_y", "mag_z",
-    "orient_yaw", "orient_roll", "orient_pitch",
+    "orient_yaw", "orient_pitch", "orient_roll",
 ]
