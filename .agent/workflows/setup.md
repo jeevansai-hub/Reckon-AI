@@ -15,7 +15,6 @@ The dataset is **not** in this repo (GitHub LFS limits, plus the source repo shi
 license, so redistributing it from here is not cleared). Clone it from the source:
 
 ```bash
-cd io-vnbd-positioning
 git lfs install
 git clone https://github.com/onyekpeu/IO-VNBD.git data/IO-VNBD
 cd data/IO-VNBD
@@ -31,7 +30,7 @@ Only the **Synchronised** set is used (unsynchronised runs have no ground truth)
 
 ## 3. Install the package
 
-From `io-vnbd-positioning/`:
+From the repo root:
 
 ```bash
 python -m venv .venv

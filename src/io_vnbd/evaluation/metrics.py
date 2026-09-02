@@ -1,7 +1,7 @@
 """
 Trajectory-level evaluation metrics: Absolute Trajectory Error (ATE) and
 Relative Pose Error (RPE), reported per category as recommended in
-IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md section 10, step 7.
+Project-Context/IO-VNBD-Repository-Breakdown.md section 10, step 7.
 """
 
 import numpy as np

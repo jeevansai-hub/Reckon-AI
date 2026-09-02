@@ -6,7 +6,6 @@ Two real bugs have already been caught by exactly these two checks — do not sk
 ## 1. Verify the CSV schema
 
 ```bash
-cd io-vnbd-positioning
 PYTHONIOENCODING=utf-8 python scripts/verify_schema.py
 ```
 

@@ -1,6 +1,6 @@
 """
 Baseline LSTM dead-reckoning-by-network model, per
-IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md section 10, step 6.
+Project-Context/IO-VNBD-Repository-Breakdown.md section 10, step 6.
 
 Input:  windowed, gravity-corrected IMU sequence
         (accel_x/y/z minus gravity_x/y/z, gyro_yaw/pitch/roll) -> 6 channels

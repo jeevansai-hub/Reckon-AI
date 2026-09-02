@@ -1,13 +1,13 @@
-# io-vnbd-positioning
+# Reckon-AI — IO-VNBD GPS-denied positioning
 
 GPS-denied ground-vehicle positioning using the IO-VNBD dataset (smartphone IMU → displacement estimation, evaluated against vehicle CAN-bus/GPS ground truth).
 
-Full data reference: [`../IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md`](../IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md) — read that first if any column name or run here is unfamiliar. Product/technical spec: see the `PRD — AI-ML Intelligent Dead Reckoning System` page in the project's Notion workspace (SRS sections SRS-1 through SRS-7 map directly onto the packages below).
+Full data reference: [`Project-Context/IO-VNBD-Repository-Breakdown.md`](Project-Context/IO-VNBD-Repository-Breakdown.md) — read that first if any column name or run here is unfamiliar. Product/technical spec: see the `PRD — AI-ML Intelligent Dead Reckoning System` page in the project's Notion workspace (SRS sections SRS-1 through SRS-7 map directly onto the packages below).
 
 ## Project layout
 
 ```
-io-vnbd-positioning/
+Reckon-AI/
 ├── pyproject.toml            <- dependencies + tool config (replaces requirements.txt)
 ├── .pre-commit-config.yaml   <- auto-lint/format before each commit (ruff, free)
 ├── .github/workflows/ci.yml  <- lint + data-free tests on every push (GitHub Actions, free)
@@ -15,6 +15,8 @@ io-vnbd-positioning/
 │   ├── data.yaml              <- dataset root, category/driver map, train/val/test split
 │   ├── model.yaml              <- window size, stride, LSTM hyperparameters
 │   └── paths.yaml              <- where models/reports/logs get written
+├── Project-Context/            <- project docs, dataset reference
+├── .agent/workflows/           <- repeatable task playbooks
 ├── data/
 │   └── IO-VNBD/                <- the cloned dataset repo goes here (gitignored, not committed)
 ├── src/io_vnbd/                 <- the installable package
@@ -74,7 +76,7 @@ ls -la "data/IO-VNBD/Synchronised V abd S datasets/Categorised IOVNB Dataset/S (
 
 ## Step 2 — Python environment
 
-From `io-vnbd-positioning/`:
+From the repo root:
 
 ```bash
 python -m venv .venv

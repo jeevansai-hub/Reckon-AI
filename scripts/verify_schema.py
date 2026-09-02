@@ -4,7 +4,7 @@ Run this FIRST after `git lfs pull`, before trusting anything else in src/.
 Prints the real header row of one V- and one S- file side-by-side against
 the documented schema in src/schema.py, so you can eyeball whether the PDF's
 documented column order actually matches what's in the file (see the
-gyroscope-column typo flagged in IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md
+gyroscope-column typo flagged in Project-Context/IO-VNBD-Repository-Breakdown.md
 section 6 -- this is exactly the kind of mismatch this script exists to catch).
 
 Usage:

@@ -1,19 +1,10 @@
 name: CI
 
-on:
-  push:
-    paths:
-      - "io-vnbd-positioning/**"
-  pull_request:
-    paths:
-      - "io-vnbd-positioning/**"
+on: [push, pull_request]
 
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: io-vnbd-positioning
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

@@ -1,7 +1,7 @@
 """
 Fixed-length sliding-window generation over a run, plus the
 driver/category-based train/val/test split described in
-IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md section 10, step 5.
+Project-Context/IO-VNBD-Repository-Breakdown.md section 10, step 5.
 
 Splitting by category (not by random row) matters because adjacent rows
 in the same drive are highly correlated -- a random row split would leak

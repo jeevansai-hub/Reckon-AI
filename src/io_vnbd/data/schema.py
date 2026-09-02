@@ -1,7 +1,7 @@
 """
 Column names for the two IO-VNBD CSV file types, as documented in
 README_1.pdf (Tables 3 and 4) and cross-checked in
-IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md.
+Project-Context/IO-VNBD-Repository-Breakdown.md.
 
 IMPORTANT: verify these against the real header row of an actual file
 after `git lfs pull` -- the PDF's column order is the documented spec,

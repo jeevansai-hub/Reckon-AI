@@ -1,6 +1,6 @@
 """
 IMU bias calibration using the dataset's two dedicated stationary runs
-(Vw1, Vw15) -- see IO-VNBD-Analysis/IO-VNBD-Repository-Breakdown.md section 3.7
+(Vw1, Vw15) -- see Project-Context/IO-VNBD-Repository-Breakdown.md section 3.7
 for why these two specifically, and why they should be inspected separately
 before being combined.
 """
