@@ -15,6 +15,7 @@ driver-skew claims against the actual files on disk.
 Usage:
     python scripts/explore_dataset.py
 """
+
 import math
 from pathlib import Path
 
@@ -22,12 +23,22 @@ import pandas as pd
 
 from io_vnbd.data.loader import load_run
 
-ROOT = Path(__file__).resolve().parent.parent / "data" / "IO-VNBD" / \
-    "Synchronised V abd S datasets" / "Categorised IOVNB Dataset"
+ROOT = (
+    Path(__file__).resolve().parent.parent
+    / "data"
+    / "IO-VNBD"
+    / "Synchronised V abd S datasets"
+    / "Categorised IOVNB Dataset"
+)
 
 CATEGORY_DRIVER = {
-    "S": "Driver A", "M": "Driver B", "Y": "Driver D",
-    "Vf": "Driver E", "Vta": "Driver E", "Vtb": "Driver E", "Vw": "Driver E",
+    "S": "Driver A",
+    "M": "Driver B",
+    "Y": "Driver D",
+    "Vf": "Driver E",
+    "Vta": "Driver E",
+    "Vtb": "Driver E",
+    "Vw": "Driver E",
 }
 
 
@@ -84,16 +95,18 @@ def main():
             imu_cols = ["accel_x", "accel_y", "accel_z", "gyro_yaw", "gyro_pitch", "gyro_roll"]
             nan_counts = s_df[imu_cols].isna().sum().sum()
 
-            rows.append({
-                "category": category,
-                "driver": CATEGORY_DRIVER.get(category, "?"),
-                "run": run_name,
-                "n_rows": n_rows,
-                "median_dt_s": round(dt, 3) if pd.notna(dt) else None,
-                "duration_min": round(duration_s / 60, 1) if pd.notna(duration_s) else None,
-                "dist_km": round(dist_km, 2),
-                "nan_imu_cells": int(nan_counts),
-            })
+            rows.append(
+                {
+                    "category": category,
+                    "driver": CATEGORY_DRIVER.get(category, "?"),
+                    "run": run_name,
+                    "n_rows": n_rows,
+                    "median_dt_s": round(dt, 3) if pd.notna(dt) else None,
+                    "duration_min": round(duration_s / 60, 1) if pd.notna(duration_s) else None,
+                    "dist_km": round(dist_km, 2),
+                    "nan_imu_cells": int(nan_counts),
+                }
+            )
 
     df = pd.DataFrame(rows)
 
@@ -107,13 +120,17 @@ def main():
             print(f"  [{cat}] {run}: {err}")
 
     print("\n--- PER-CATEGORY ROLLUP ---")
-    rollup = df.groupby(["category", "driver"]).agg(
-        n_runs=("run", "count"),
-        total_rows=("n_rows", "sum"),
-        total_minutes=("duration_min", "sum"),
-        total_km=("dist_km", "sum"),
-        total_nan_imu_cells=("nan_imu_cells", "sum"),
-    ).round(1)
+    rollup = (
+        df.groupby(["category", "driver"])
+        .agg(
+            n_runs=("run", "count"),
+            total_rows=("n_rows", "sum"),
+            total_minutes=("duration_min", "sum"),
+            total_km=("dist_km", "sum"),
+            total_nan_imu_cells=("nan_imu_cells", "sum"),
+        )
+        .round(1)
+    )
     print(rollup.to_string())
 
     print("\n--- TOTALS ---")

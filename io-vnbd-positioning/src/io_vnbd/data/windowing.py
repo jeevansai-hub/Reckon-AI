@@ -7,19 +7,25 @@ Splitting by category (not by random row) matters because adjacent rows
 in the same drive are highly correlated -- a random row split would leak
 the test trajectory into training.
 """
+
 from dataclasses import dataclass
 
 import pandas as pd
 
-TRAIN_CATEGORIES = ["S", "Vf", "Vta", "Vw"]
-VAL_CATEGORIES = ["Y", "M"]      # small defensive-driver runs: style-generalization check
-TEST_CATEGORIES = ["Vtb"]        # entire category held out: unseen-route test
+from io_vnbd.config import load_config
+
+_split = load_config("data")["split"]
+_model_cfg = load_config("model")["windowing"]
+
+TRAIN_CATEGORIES = _split["train_categories"]
+VAL_CATEGORIES = _split["val_categories"]  # small defensive-driver runs: style-generalization check
+TEST_CATEGORIES = _split["test_categories"]  # entire category held out: unseen-route test
 
 
 @dataclass
 class Window:
-    imu: pd.DataFrame       # gravity-corrected accel + gyro, window_size rows
-    dx: float               # ground-truth displacement (metres, local frame) over the window
+    imu: pd.DataFrame  # gravity-corrected accel + gyro, window_size rows
+    dx: float  # ground-truth displacement (metres, local frame) over the window
     dy: float
     run_name: str
     start_row: int
@@ -29,8 +35,8 @@ def make_windows(
     s_df: pd.DataFrame,
     xy: pd.DataFrame,
     run_name: str,
-    window_size: int = 100,
-    stride: int = 50,
+    window_size: int = _model_cfg["window_size"],
+    stride: int = _model_cfg["stride"],
 ) -> list[Window]:
     """window_size=100 rows = 10s at 10Hz. Shrink this if you need faster-updating
     displacement predictions; grow it if per-window drift is too noisy at 10s.

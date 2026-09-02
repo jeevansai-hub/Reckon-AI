@@ -4,14 +4,17 @@ IMU bias calibration using the dataset's two dedicated stationary runs
 for why these two specifically, and why they should be inspected separately
 before being combined.
 """
+
 from pathlib import Path
 
 import pandas as pd
 
+from io_vnbd.config import load_config
+
 from .loader import load_run
 
 BIAS_CHANNELS = ["accel_x", "accel_y", "accel_z", "gyro_yaw", "gyro_pitch", "gyro_roll"]
-STATIONARY_RUNS = ["Vw1", "Vw15"]
+STATIONARY_RUNS = load_config("data")["bias_calibration"]["stationary_runs"]
 
 
 def per_run_bias(root: Path) -> dict[str, pd.Series]:

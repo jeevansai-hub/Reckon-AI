@@ -2,6 +2,7 @@
 name = "io-vnbd-positioning"
 version = "0.1.0"
 description = "GPS-denied ground-vehicle positioning using the IO-VNBD dataset."
+license = "MIT"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=1.26",

@@ -10,12 +10,20 @@ section 6 -- this is exactly the kind of mismatch this script exists to catch).
 Usage:
     python scripts/verify_schema.py
 """
+
 from pathlib import Path
 
 from io_vnbd.data.schema import S_COLUMNS, V_COLUMNS
 
-DATA_ROOT = Path(__file__).resolve().parent.parent / "data" / "IO-VNBD" / \
-    "Synchronised V abd S datasets" / "Categorised IOVNB Dataset" / "S (Driver A)" / "S1"
+DATA_ROOT = (
+    Path(__file__).resolve().parent.parent
+    / "data"
+    / "IO-VNBD"
+    / "Synchronised V abd S datasets"
+    / "Categorised IOVNB Dataset"
+    / "S (Driver A)"
+    / "S1"
+)
 
 
 def main():

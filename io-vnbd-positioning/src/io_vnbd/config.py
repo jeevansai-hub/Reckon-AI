@@ -1,13 +1,13 @@
 """
 Loads the YAML files under configs/ into plain dicts.
 
-Not yet wired into any pipeline code -- src/io_vnbd/data/windowing.py and
-src/io_vnbd/data/bias.py still hold their own hardcoded constants as the
-current source of truth. This loader exists so Milestone 2 training code
-can read from configs/*.yaml from day one instead of hardcoding new
-constants of its own; migrating windowing.py/bias.py to read from here
-too is a follow-up, not done as part of this restructure.
+configs/*.yaml is the source of truth for split categories, bias
+calibration runs, windowing, and model hyperparameters -- io_vnbd.data.
+windowing, io_vnbd.data.bias, and io_vnbd.models.lstm all read their
+defaults from here via load_config(), so changing an experiment setting
+means editing a YAML file, not hunting through source.
 """
+
 from pathlib import Path
 
 import yaml

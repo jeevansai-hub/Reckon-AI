@@ -7,6 +7,7 @@ to confirm your environment is sane before pulling any data.
 Usage:
     pytest tests/test_model_smoke.py -v
 """
+
 import torch
 
 from io_vnbd.models.lstm import InertialDisplacementNet
