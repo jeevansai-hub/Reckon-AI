@@ -35,7 +35,7 @@ io-vnbd-positioning/
 
 ## Step 1 — Get the dataset
 
-The dataset lives in a **separate repo** (`onyekpeu/IO-VNBD`), not this project. It uses Git LFS, so a plain clone gives you empty pointer files, not real CSVs.
+The dataset lives in a **separate repo** (`onyekpeu/IO-VNBD`), not this project — it is **not** committed here (see `.gitignore`), both because of GitHub's LFS storage/bandwidth limits and because the source repo ships with no license file, so redistributing the raw data from this repo hasn't been cleared. Clone it directly from the source instead:
 
 ```bash
 git lfs install
@@ -44,6 +44,10 @@ cd data/IO-VNBD
 git lfs pull
 cd ../..
 ```
+
+A plain `git clone` alone only gives you ~130-byte LFS pointer files, not real CSVs — the `git lfs pull` step is required. Expect this to pull down **~2.2 GB** of real data (727 LFS-tracked files: both the `Synchronised V and S datasets` and `Unsynchronised V and S Dataset` folders, each also available as a `.zip`) and to take a while depending on connection speed.
+
+This project's pipeline only uses the **Synchronised** dataset (see §14 of `Project-Context/00-PROJECT-CONTEXT.md` — unsynchronized runs have no matching ground truth to train against), so if disk space or bandwidth is tight, it's safe to delete `data/IO-VNBD/Unsynchronised V and S Dataset*` after cloning.
 
 Sanity-check real bytes landed (should be several MB, not ~130 bytes):
 ```bash
