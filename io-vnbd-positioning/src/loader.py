@@ -43,8 +43,12 @@ def load_run(root: Path, run_name: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     v_file, s_file = find_run_files(root, run_name)
 
-    v_df = pd.read_csv(v_file, header=0)
-    s_df = pd.read_csv(s_file, header=0)
+    # encoding_errors="replace": every real S-*.csv header has a mis-encoded
+    # unit symbol (literal byte 0xB2 for "m/s²" instead of valid UTF-8) --
+    # confirmed across the full dataset, not a one-off file. Harmless here
+    # since the header text is immediately discarded below.
+    v_df = pd.read_csv(v_file, header=0, encoding="utf-8", encoding_errors="replace")
+    s_df = pd.read_csv(s_file, header=0, encoding="utf-8", encoding_errors="replace")
 
     assert v_df.shape[1] == len(V_COLUMNS), (
         f"{v_file.name} has {v_df.shape[1]} columns, expected {len(V_COLUMNS)}. "
